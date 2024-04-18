@@ -1,0 +1,13 @@
+en
+conf t
+show ip int brief
+show ip route
+int lo15
+ip add 15.16.17.18 255.255.255.0
+exit
+int lo18
+ip add 16.17.18.1 255.255.255.0
+exit
+ip route 0.0.0.0 0.0.0.0 lo15 
+do show ip int brief
+do show ip route

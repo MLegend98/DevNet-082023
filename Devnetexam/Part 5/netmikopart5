@@ -1,0 +1,30 @@
+from netmiko import ConnectHandler 
+
+device = { 
+    'device_type': 'cisco_ios', 
+    'host': '192.168.56.101',
+    'username': 'cisco', 
+    'password': 'cisco123!', 
+    'secret': 'cisco'
+
+} 
+
+def read_commands_from_file(file_path): 
+
+    with open(file_path, 'r') as f: 
+
+        return [line.strip() for line in f.readlines()] 
+
+commands_file = r"/home/devasc/Documents/configpart5" 
+
+config_commands = read_commands_from_file(commands_file) 
+
+net_connect = ConnectHandler(**device) 
+
+net_connect.enable() 
+
+output = net_connect.send_config_set(config_commands) 
+
+print(output) 
+
+net_connect.disconnect()
